@@ -191,20 +191,20 @@ const Room = (props) => {
                       };
                     var data1 = "";
                     var data2 = "";
-                    var payload = [ { state:'neutral'  , emoji:'' , baseurl: photo[0] } , { state: 'neutral' , emoji:'' , baseurl:photo[1] } ];
+                    var payload = [ { 'state':'neutral'  , 'emoji':'😐' , 'baseurl': "photo[0]" } , { 'state': 'neutral' , 'emoji':'😐' , 'baseurl':"photo[1]" } ];
                     
-                    axios.post("http://1a6c34c79857.ngrok.io/" ,  { "baseurl": photo[0] } , axiosConfig )
+                    axios.post("http://139.59.45.17:1234/" ,  { "baseurl": photo[0] } , axiosConfig )
                     .then(r => { 
                         console.log(r);
-                        console.log(r.data); data1 = r.data; 
+                        data1 = r.data; 
                         payload[0]['state'] = data1.slice(0 , data1.length-2 );
                         payload[0]['emoji'] = data1[data1.lenght-1];
                     } )
                     .catch(e => console.log(e) );
 
-                    axios.post("http://1a6c34c79857.ngrok.io/" ,  { "baseurl": photo[1] } , axiosConfig )
+                    axios.post("http://139.59.45.17:1234/" ,  { "baseurl": photo[1] } , axiosConfig )
                     .then(r => { 
-                        console.log(r); data2 = r.data; console.log(data2);
+                        console.log(r); data2 = r.data; 
                         payload[1]['state'] = data2.slice(0 , data2.length-2 );
                         payload[1]['emoji'] = data2[data2.lenght-1];
                     } )

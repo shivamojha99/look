@@ -53,14 +53,16 @@ const CreateRoom = (props) => {
                   <Grid container spacing={3}>
                     <Grid item xs={6}> 
                       <Paper className={classes.paper}> 
-                      <img src={ph1.baseurl} alt="img" width="300" height="300" ></img> 
-                      <Typography gutterBottom variant="h5" component="h2"> {ph1.state} {ph1.emoji}</Typography>
+                      {/* <img src={ph1.baseurl} alt="img" width="300" height="300" ></img>  */}
+                       {ph1.emoji}
+                      <Typography gutterBottom variant="h5" component="h2">{ph1.state} </Typography>
                       </Paper>
                     </Grid>
                     <Grid item xs={6}> 
                       <Paper className={classes.paper}>
-                      <img src={ph2.baseurl} alt="img" width="300" height="300" ></img> 
-                      <Typography gutterBottom variant="h5" component="h2">{ph2.state} {ph2.emoji}</Typography>
+                      {/* <img src={ph2.baseurl} alt="img" width="300" height="300" ></img>  */}
+                      {ph2.emoji}
+                      <Typography gutterBottom variant="h5" component="h2">{ph2.state} </Typography>
                       </Paper>
                     </Grid>
                   </Grid>
@@ -76,7 +78,6 @@ const CreateRoom = (props) => {
     
     function createRoom() {
         const id = uuid();
-        alert(`share your roomId : ${id}`);
         props.history.push(`/room/${id}`);
     }
     function joinRoom( ) {
