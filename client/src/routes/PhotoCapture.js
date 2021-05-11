@@ -1,43 +1,45 @@
-import React from "react";
 
 const PhotoCapture  = ( props ) => {
 
-    var width = 320;    // We will scale the photo width to this
-    var height = 0;     // This will be computed based on the input stream
+    var width = 500;    // We will scale the photo width to this
+    var height = 500;     // This will be computed based on the input stream
 
-    var streaming = localStorage.getItem('cam'); //console.log(props);
+    var streaming = localStorage.getItem('cam');  //console.log(streaming);
 
-    var video = document.getElementById('video');
-    var canvas = document.getElementById('canvas'); console.log(canvas);
+    var userVideo = document.getElementById('video');
+    var partnerVideo = document.getElementById('partnerVideo');
+    var canvas = document.getElementById('canvas'); //console.log(canvas);
+    var partnerCanvas = document.getElementById('partnerCanvas');
     var photo = document.getElementById('photo');
     var startbutton = document.getElementById('startbutton');
     var capturePictures = [];
 
-    if (streaming) {
-    height = video.videoHeight / (video.videoWidth/width);
+    if (streaming && !( userVideo == null) ) {
+    // height = userVideo.videoHeight / (userVideo.videoWidth/width);
     
-    if (isNaN(height)) {
-        height = width / (4/3);
-    }
+    // if (isNaN(height)) {
+    //     height = width / (4/3);
+    // }
     
-    video.setAttribute('width', width);
-    video.setAttribute('height', height);
+    // userVideo.setAttribute('width', width);
+    // userVideo.setAttribute('height', height);
+    // if( ! partnerVideo === null )
+    // {
+    //   partnerVideo.setAttribute('height', height);
+    //   // partnerVideo.setAttribute('width', width);
+    // }
     canvas.setAttribute('width', width);
     canvas.setAttribute('height', height);
+    partnerCanvas.setAttribute('width', width);
+    partnerCanvas.setAttribute('height', height);
     
     }
 
-    startbutton.addEventListener('click', (ev) => {
-    //   while(streaming) 
-    //   {
-    //       setTimeout(takepicture() , 60000);
-    //       streaming = localStorage.getItem('cam');
-          
-    //   }
-      takepicture();
-      ev.preventDefault();
-    }, false);
-    
+    // startbutton.addEventListener('click', (ev) => {
+    //   takepicture();
+    //   ev.preventDefault();
+    // }, false);
+    if( !( userVideo === null ))
     clearphoto();
 
   function clearphoto() {
@@ -46,7 +48,15 @@ const PhotoCapture  = ( props ) => {
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     var data = canvas.toDataURL('image/png');
-    photo.setAttribute('src', data);
+    // photo.setAttribute('src', data);
+
+    var context1 = partnerCanvas.getContext('2d');
+    context1.fillStyle = "#AAA";
+    context1.fillRect(0, 0, canvas.width, canvas.height);
+
+    // var data = partnerCanvas.toDataURL('image/png');
+
+    takepicture()
   }
 
   function convertURIToImageData(URI) {
@@ -67,21 +77,30 @@ const PhotoCapture  = ( props ) => {
   
   function takepicture() {
     var context = canvas.getContext('2d');
+    var context1 = partnerCanvas.getContext('2d');
     if (width && height) {
       canvas.width = width;
       canvas.height = height;
-      context.drawImage(video, 0, 0, width, height);
-      console.log(canvas);
+      context.drawImage(userVideo, 0, 0, width, height);
+      // console.log(canvas);
       var data = canvas.toDataURL('image/png');
-      photo.setAttribute('src', data);
+      // photo.setAttribute('src', data);
     
-    capturePictures.push(data);
-    console.log(canvas);
-    console.log(photo);
-    convertURIToImageData( data ).then(function(imageData) {
+      capturePictures.push(data);
+      
+      partnerCanvas.width = width;
+      partnerCanvas.height = height;
+      context1.drawImage(partnerVideo, 0, 0, width, height);
+      // console.log(partnerCanvas);
+      data = partnerCanvas.toDataURL('image/png');
+      // photo.setAttribute('src', data);
+    
+      capturePictures.push(data);
+
+    // convertURIToImageData( data ).then(function(imageData) {
         // Here you can use imageData
-        console.log(imageData);
-      });
+        // console.log(imageData);
+      // });
 
     } else {
       clearphoto();
