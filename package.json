@@ -1,9 +1,11 @@
 {
-  "name": "zoom_clone",
+  "name": "look",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start":"PROD=true node server.js",
+    "postinstall":"cd ./client && npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
