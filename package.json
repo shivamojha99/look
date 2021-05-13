@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"PROD=true node server.js",
+    "start":"set PROD=true & node server.js",
     "postinstall":"cd ./client && npm install"
   },
   "keywords": [],
