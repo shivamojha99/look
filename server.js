@@ -9,6 +9,12 @@ const path = require("path");
 
 const rooms = {};
 
+app.use( express.static(path.join(__dirname , './client/build')));
+app.get('/*', (req , res) =>{
+    console.log("called get method!");
+    res.sendFile(path.join(__dirname , './client/build/index.html'));
+});
+
 io.on("connection", socket => {
     socket.on("join room", roomID => {
         if (rooms[roomID]) {
@@ -38,14 +44,6 @@ io.on("connection", socket => {
 
 });
 
-if( process.env.PROD ) {
-    app.use( express.static(path.join(__dirname , './client/build')));
-    console.log(__dirname);
-    app.get('/*', (req , res) =>{
-        console.log("called get method!");
-        res.sendFile(path.join(__dirname , './client/build/index.html'));
-    });
-}
 
 const port = process.env.PORT || 8000;
 // const port = 8000;
