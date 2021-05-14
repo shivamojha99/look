@@ -191,26 +191,27 @@ const Room = (props) => {
                       };
                     var data1 = "";
                     var data2 = "";
+                    var a={'angry': '😠','disgust': '🤢', 'fear': '😱', 'happy':'😁', 'sad': '☹️', 'surprise': '😮', 'neutral' : '😐'};
                     var payload = [ { 'state':'neutral'  , 'emoji':'😐' , 'baseurl': "photo[0]" } , { 'state': 'neutral' , 'emoji':'😐' , 'baseurl':"photo[1]" } ];
                     
-                    axios.post("http://139.59.45.17:1234/" ,  { "baseurl": photo[0] } , axiosConfig )
+                    axios.post("http://139.59.45.17:4567/" ,  { "baseurl": photo[0] } , axiosConfig )
                     .then(r => { 
                         console.log(r);
                         data1 = r.data; 
-                        payload[0]['state'] = data1.slice(0 , data1.length-2 );
-                        payload[0]['emoji'] = data1[data1.lenght-1];
+                        payload[0]['state'] = data1.slice(0 , data1.length-3 );
+                        payload[0]['emoji'] = a[payload[0]['state']];
                     } )
                     .catch(e => console.log(e) );
 
-                    axios.post("http://139.59.45.17:1234/" ,  { "baseurl": photo[1] } , axiosConfig )
+                    axios.post("http://139.59.45.17:4567/" ,  { "baseurl": photo[1] } , axiosConfig )
                     .then(r => { 
                         console.log(r); data2 = r.data; 
-                        payload[1]['state'] = data2.slice(0 , data2.length-2 );
-                        payload[1]['emoji'] = data2[data2.lenght-1];
+                        payload[1]['state'] = data2.slice(0 , data2.length-3 );
+                        payload[1]['emoji'] = a[payload[1]['state']];
                     } )
                     .catch(e => console.log(e) );
 
-                    console.log(payload[0]);
+                    // console.log(payload[0]);
                     photos.push(payload);
                     // photos.push([data1 , data2]);
                     cnt++;
