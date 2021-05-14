@@ -40,7 +40,9 @@ io.on("connection", socket => {
 
 if( process.env.PROD ) {
     app.use( express.static(path.join(__dirname , './client/build')));
-    app.get('*', (req , res) =>{
+    console.log(__dirname);
+    app.get('/*', (req , res) =>{
+        console.log("called get method!");
         res.sendFile(path.join(__dirname , './client/build/index.html'));
     });
 }
