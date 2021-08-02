@@ -31,7 +31,7 @@ function App() {
     <Grid item xs={12}>
         <Paper className={classes.paper}>
         <Typography gutterBottom variant="h3" component="h2">
-                  LOOK </Typography>
+                  Advance Review System </Typography>
           
         </Paper>
       </Grid>
